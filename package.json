@@ -1,0 +1,19 @@
+{
+  "name": "spa-basket",
+  "version": "1.0.0",
+  "description": "Frontend test\r ===========\r You should create simple application with shopping basket functionality. All data needed to complete this goal is presented in the current repository.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shockwaves/spa-basket.git"
+  },
+  "author": "shockwaves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shockwaves/spa-basket/issues"
+  },
+  "homepage": "https://github.com/shockwaves/spa-basket#readme"
+}

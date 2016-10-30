@@ -4,8 +4,8 @@
   "description": "Frontend test\r ===========\r You should create simple application with shopping basket functionality. All data needed to complete this goal is presented in the current repository.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

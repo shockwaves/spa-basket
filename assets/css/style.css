@@ -1,0 +1,46 @@
+.navbar-default {
+  background: transparent;
+  border: none; }
+
+.panel-body {
+  padding: 0; }
+  .panel-body .list-group-item {
+    border-left: none;
+    border-right: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
+
+.slide-image {
+  width: 100%; }
+
+.carousel-holder {
+  margin-bottom: 30px; }
+
+.carousel-control,
+.item {
+  border-radius: 4px; }
+
+.caption {
+  height: 130px;
+  overflow: hidden; }
+  .caption h4 {
+    white-space: nowrap; }
+
+.ratings {
+  padding: 9px; }
+
+.thumbnail {
+  padding: 0;
+  margin: 0; }
+  .thumbnail .caption-full {
+    padding: 9px;
+    color: #333; }
+
+.thumb-overlap {
+  min-height: 300px;
+  position: relative; }
+  .thumb-overlap:hover .thumbnail {
+    position: absolute;
+    z-index: 1; }
+  .thumb-overlap:hover .caption {
+    height: auto; }

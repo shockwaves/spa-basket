@@ -22,6 +22,7 @@
 
 .caption {
   height: 130px;
+  min-height: 130px;
   overflow: hidden; }
   .caption h4 {
     white-space: nowrap; }
@@ -37,7 +38,7 @@
     color: #333; }
 
 .thumb-overlap {
-  min-height: 300px;
+  min-height: 350px;
   position: relative; }
   .thumb-overlap:hover .thumbnail {
     position: absolute;

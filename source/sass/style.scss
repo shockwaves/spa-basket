@@ -29,6 +29,7 @@
 
 .caption {
   height: 130px;
+  min-height: 130px;
   overflow: hidden;
 
   h4 {
@@ -51,7 +52,7 @@
 }
 
 .thumb-overlap {
-  min-height: 300px;
+  min-height: 350px;
   position: relative;
 
   &:hover .thumbnail {

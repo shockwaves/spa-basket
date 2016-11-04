@@ -18,13 +18,15 @@
   },
   "homepage": "https://github.com/shockwaves/spa-basket#readme",
   "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
     "bootstrap": "^3.3.7",
-    "gulp": "^3.9.1",
     "jquery": "^3.1.1",
     "node-static": "^0.7.9"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-sass": "^2.3.2"
+    "gulp-sass": "^2.3.2",
+    "webpack": "^1.13.3"
   }
 }

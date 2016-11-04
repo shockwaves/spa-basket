@@ -1,0 +1,37 @@
+<div class="col-sm-4 col-lg-4 col-md-4"
+     ng-repeat="product in products | filter:{category_id: category_id}">
+    <div class="thumb-overlap">
+        <div class="thumbnail">
+            <div ng-repeat="gallery in galleries | filter:{id: product.gallery_id}">
+                <div class="product-cover">
+                    <img class="img-responsive" ng-src="images/{{product.gallery_id}}/{{ gallery.images[0] }}" alt="">
+                </div>
+
+                <div class="gallery">
+                    <img ng-repeat="image in gallery.images" width="45" height="45"
+                         ng-src="images/{{product.gallery_id}}/{{image}}">
+                </div>
+            </div>
+
+            <div class="caption">
+                <h4>
+                    <a>{{ product.title }}</a>
+                </h4>
+
+                <p>
+                    {{ product.description }}
+                </p>
+            </div>
+            <div class="ratings clearfix">
+                <div class="pull-right btn-group " role="group" aria-label="Large button group">
+                    <button type="button" class="btn btn-success" ng-click="addItem(product.id)">
+                        $ {{ product.price }}
+                    </button>
+                    <button type="button" class="btn btn-success" ng-click="addItem(product.id)">
+                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

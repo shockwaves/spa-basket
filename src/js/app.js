@@ -1,3 +1,8 @@
+'use strict';
+
+require('../../node_modules/angular/angular.js');
+require('../../node_modules/angular-route/angular-route.js');
+
 var app = angular.module('spa-basket', ["ngRoute"]);
 
 app.run(function ($rootScope, $http) {

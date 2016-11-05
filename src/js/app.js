@@ -5,7 +5,7 @@ require('../../node_modules/angular-route/angular-route.js');
 
 var app = angular.module('spa-basket', ["ngRoute"]);
 
-app.run(function ($rootScope, $http) {
+app.run(function ($rootScope, $filter, $http) {
     $rootScope.basket = JSON.parse(localStorage.getItem("basket")) || [];
 
     $rootScope.addItem = function (id) {
@@ -17,6 +17,27 @@ app.run(function ($rootScope, $http) {
         $rootScope.basket.splice(index, 1);
         localStorage.setItem("basket", JSON.stringify($rootScope.basket));
     };
+
+    $rootScope.getTotal = function () {
+        var total = 0;
+
+        if(!$rootScope.products) {
+            return 'products not ready';
+        }
+
+        for (var i = 0; i < $rootScope.basket.length; i++) {
+            var product_id = $rootScope.basket[i];
+            var product = $filter('filter')($rootScope.products, {id: product_id})[0];
+            total += product.price;
+        }
+
+        return total;
+    };
+
+    $rootScope.setOrderBy = function(expression) {
+        console.log(expression);
+        $rootScope.sortOrder = expression;
+    }
 
     $rootScope.isCategoryActive = function (category_id) {
         return category_id === $rootScope.category_id;

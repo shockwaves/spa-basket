@@ -1,13 +1,15 @@
-<div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in products | filter:{category_id: category_id}">
+<div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in products | filter:{category_id: category_id} | orderBy: sortOrder">
     <div class="thumb-overlap">
         <div class="thumbnail">
             <div ng-repeat="gallery in galleries | filter:{id: product.gallery_id}">
                 <div class="product-cover">
-                    <img class="img-responsive" ng-src="images/{{product.gallery_id}}/{{ gallery.images[0] }}" alt="">
+                    <img class="img-responsive" ng-src="images/{{product.gallery_id}}/{{ gallery.images[0] }}"
+                         alt="{{ product.title }}" title="{{ product.title }}">
                 </div>
 
                 <div class="gallery">
-                    <img ng-repeat="image in gallery.images" width="45" height="45" ng-src="images/{{product.gallery_id}}/{{image}}">
+                    <img ng-repeat="image in gallery.images" width="45" height="45"
+                         ng-src="images/{{product.gallery_id}}/{{image}}">
                 </div>
             </div>
 
@@ -21,14 +23,21 @@
                 </p>
             </div>
             <div class="ratings clearfix">
-                <div class="pull-right btn-group " role="group" aria-label="Large button group">
-                    <button type="button" class="btn btn-success" ng-click="addItem(product.id)">
-                        $ {{ product.price }}
-                    </button>
-                    <button type="button" class="btn btn-success" ng-click="addItem(product.id)">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                    </button>
-                </div>
+                <!--<div class="quantity-field">-->
+                    <!--<input type="text" class="form-control" size="1">-->
+                    <!--<div class="btn-group" role="group">-->
+                        <!--<button type="button" class="btn btn-success dropup">-->
+                            <!--<span class="caret"></span>-->
+                        <!--</button>-->
+                        <!--<button type="button" class="btn btn-success">-->
+                            <!--<span class="caret"></span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <button type="button" class="btn btn-success btn-buy pull-right" ng-click="addItem(product.id)">
+                    <span class="price">{{ product.price }}</span>
+                    <span class="glyphicon glyphicon-shopping-cart basket-icon" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
     </div>

@@ -50,25 +50,40 @@
 
                 <!-- Navigation -->
                 <nav class="navbar navbar-default navbar-static-top" role="navigation">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <span class="navbar-brand">Please choose category:</span>
+                    <div class="col-md-12">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="navbar-brand">Please choose category:</span>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li ng-class="{ active: isCategoryActive(category.id)}"><a href="#/">All</a></li>
+                                <li ng-repeat="category in categories"
+                                    ng-class="{ active: isCategoryActive(category.id)}">
+                                    <a href="#categories/{{ category.id }}">{{ category.title }}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li ng-class="{ active: isCategoryActive(category.id)}"><a href="#/">All</a></li>
-                            <li ng-repeat="category in categories" ng-class="{ active: isCategoryActive(category.id)}">
-                                <a href="#categories/{{ category.id }}">{{ category.title }}</a>
-                            </li>
-                        </ul>
+                    <div class="col-md-12">
+                        <form class="form-inline filter-sorting">
+                            <div class="form-group">
+                                <label>Sort by </label>
+                                <select class="form-control" ng-model="sortOrder">
+                                    <option value="">none</option>
+                                    <option value="price">by price in ascending order</option>
+                                    <option value="-price">by price in descending mode</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                     <!-- /.navbar-collapse -->
 
@@ -88,8 +103,11 @@
                 <div class="panel-body">
                     <div class="list-group">
                         <a class="list-group-item" ng-repeat="product_id in basket track by $index"
-                           ng-click="removeItem($index)">{{ (products | filter:{id: product_id}).shift().title }}</a>
+                           ng-click="removeItem($index)">{{ (products | filter:{id: product_id})[0].title }} $ {{ (products | filter:{id: product_id})[0].price }}</a>
                     </div>
+                </div>
+                <div class="panel-footer clearfix">
+                    <span class="pull-right">$ {{ getTotal() }}</span>
                 </div>
             </div>
         </div>

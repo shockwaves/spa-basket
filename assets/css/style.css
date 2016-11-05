@@ -11,12 +11,14 @@ h4 {
   h4 a {
     text-decoration: underline;
     color: #05a101;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 15px; }
 
+.navbar-default .navbar-brand {
+  color: #454748; }
+
 .navbar-default .navbar-nav > li > a {
-  color: #23ab20;
-  font-size: 12px; }
+  color: #23ab20; }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:focus,
@@ -25,8 +27,20 @@ h4 {
   text-decoration: underline;
   color: #23ab20; }
 
-.img-responsive {
-  margin: 0 auto; }
+.filter-sorting .form-control,
+.filter-sorting label {
+  font-size: 12px;
+  font-weight: normal; }
+
+.filter-sorting .form-control {
+  height: auto;
+  padding: 3px;
+  min-width: 100px; }
+
+.form-control {
+  width: auto;
+  display: inline-block;
+  border-radius: 0; }
 
 .gallery {
   margin: 3px 0;
@@ -49,31 +63,46 @@ h4 {
 
 .thumb-overlap .thumbnail {
   border-radius: 0 !important;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15); }
+  border: 1px solid #c6c6c6;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+  padding: 0; }
 
 @media (min-width: 768px) {
+  .img-responsive {
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto; }
   .navbar-default {
     padding-top: 50px;
     background: transparent;
     border: none; }
+    .navbar-default .navbar-brand,
+    .navbar-default .navbar-nav > li > a {
+      font-size: 12px;
+      padding: 10px; }
   .thumb-overlap {
     height: 430px;
     position: relative; }
     .thumb-overlap .thumbnail {
-      padding: 0;
       margin: 0; }
     .thumb-overlap:hover .thumbnail {
       width: 100%;
       position: absolute;
       z-index: 1; }
     .thumb-overlap .product-cover {
-      height: 210px; }
+      height: 210px;
+      position: relative; }
     .thumb-overlap .caption {
       height: 100px;
       min-height: 100px;
       overflow: hidden; }
     .thumb-overlap:hover .caption {
       height: auto; } }
+
+.navbar-default .navbar-brand {
+  padding-left: 0; }
 
 .panel {
   margin-top: 15px;
@@ -95,14 +124,66 @@ h4 {
       border-bottom-left-radius: 0;
       background: inherit;
       cursor: pointer; }
+  .panel .panel-footer {
+    background: inherit;
+    border-top: 0; }
 
 .basket-indicator {
   display: inline-block; }
 
+.list-group {
+  margin-bottom: 0; }
+
+.quantity-field {
+  width: auto;
+  display: inline-block;
+  font-size: 0; }
+  .quantity-field .btn-group {
+    display: inline-block;
+    vertical-align: bottom; }
+  .quantity-field .btn-group > .btn {
+    display: block;
+    border-radius: 0;
+    font-size: 8px;
+    padding: 2px 6px;
+    float: none;
+    margin-left: 0; }
+  .quantity-field .form-control {
+    height: auto;
+    display: inline-block;
+    padding: 4px;
+    font-size: 12px;
+    line-height: 22px;
+    border-right: 0;
+    text-align: right; }
+
+.btn-buy {
+  font-size: 15px;
+  position: relative;
+  padding-right: 40px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.35); }
+  .btn-buy .price:before {
+    content: '$ '; }
+  .btn-buy .basket-icon {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-left: 1px solid #fff;
+    line-height: 34px;
+    width: 35px; }
+  .btn-buy:hover .basket-icon {
+    background-color: #06ee00; }
+
+.btn {
+  line-height: 1.5; }
+
 .btn-success {
+  text-shadow: none;
   border: none;
   color: #FFFFFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #059b01;
   *background-color: #059b01;
   background-image: -moz-linear-gradient(top, #06EE00, #059b01);
@@ -125,9 +206,6 @@ h4 {
   color: #FFFFFF;
   background-color: #059b01;
   *background-color: #003bb3; }
-
-.btn-group-vertical > .btn, .btn-group > .btn {
-  border-left: 1px solid #fff; }
 
 .btn-group-vertical > .btn.active,
 .btn-group-vertical > .btn:active,

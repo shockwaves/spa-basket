@@ -6,22 +6,27 @@ require('../../node_modules/bootstrap/dist/js/bootstrap.min.js');
 require('../../node_modules/angular/angular.js');
 require('../../node_modules/angular-route/angular-route.js');
 
+var options = {
+    items: 3,
+    margin: 20,
+    autoHeight : true,
+    stagePadding: 50,
+    navigation: true,
+    navigationText: [
+        "<span class='glyphicon glyphicon-menu-left'></span>",
+        "<span class='glyphicon glyphicon-menu-right'></span>"
+    ],
+    pagination: false
+};
+
 $(document).ready(function () {
-    var owl = $(".owl-carousel");
-    owl.owlCarousel({
-        items: 3,
-        margin: 20,
-        autoHeight : true,
-        stagePadding: 50,
-        navigation: true,
-        navigationText: [
-            "<span class='glyphicon glyphicon-menu-left'></span>",
-            "<span class='glyphicon glyphicon-menu-right'></span>"
-        ],
-        pagination: false
-    });
+    reinitCarousel();
 });
 
+function reinitCarousel() {
+    var owl = $(".owl-carousel");
+    owl.owlCarousel(options);
+}
 
 var app = angular.module('spa-basket', ["ngRoute"]);
 
@@ -109,7 +114,6 @@ app.run(function ($rootScope, $filter, $http) {
     };
 
     $rootScope.setOrderBy = function (expression) {
-        console.log(expression);
         $rootScope.sortOrder = expression;
     };
 
@@ -159,6 +163,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('categories', function ($rootScope, $routeParams) {
+    reinitCarousel();
     $rootScope.category_id = $routeParams.id;
 });
 

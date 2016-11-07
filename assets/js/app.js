@@ -47,39 +47,37 @@
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 
 	__webpack_require__(2);
-	//require('../../lib/jcarousel-master/dist/jquery.jcarousel.min.js');
-	//require('../../lib/jcarousel-master/examples/connected-carousels/jcarousel.connected-carousels.js');
 	__webpack_require__(4);
 	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
 
+	var options = {
+	    items: 3,
+	    margin: 20,
+	    autoHeight : true,
+	    stagePadding: 50,
+	    navigation: true,
+	    navigationText: [
+	        "<span class='glyphicon glyphicon-menu-left'></span>",
+	        "<span class='glyphicon glyphicon-menu-right'></span>"
+	    ],
+	    pagination: false
+	};
+
 	$(document).ready(function () {
-	    var owl = $(".owl-carousel");
-	    owl.owlCarousel({
-	        items: 3,
-	        //itemsMobile: 3,
-	        //itemsTabletSmall: 3,
-	        margin: 20,
-	        autoHeight : true,
-	        stagePadding: 50,
-	        navigation: true,
-	        navigationText: [
-	            "<span class='glyphicon glyphicon-menu-left'></span>",
-	            "<span class='glyphicon glyphicon-menu-right'></span>"
-	        ],
-	        //responsive: 1,
-	        pagination: false
-	    });
+	    reinitCarousel();
 	});
 
+	function reinitCarousel() {
+	    var owl = $(".owl-carousel");
+	    owl.owlCarousel(options);
+	}
 
 	var app = angular.module('spa-basket', ["ngRoute"]);
 
 	app.run(function ($rootScope, $filter, $http) {
 	    $rootScope.isProductsLoaded = false;
-	    //$rootScope.basket = [];
-	    //$rootScope.products = [];
 	    $rootScope.basket = angular.fromJson(localStorage.getItem("basket")) || [];
 
 	    $rootScope.$watch('basket', function (newValue, oldValue, scope) {
@@ -87,32 +85,16 @@
 	        localStorage.setItem("basket", angular.toJson($rootScope.basket));
 	    }, true);
 
-	    //$rootScope.$watchCollection('basket[$index].quantity', function(newNames, oldNames, scope, index) {
-	    //    console.log(index);
-	    //    //console.log(index);
-	    //    console.log('yeah');
-	    //}, true);
-
-	    $rootScope.test = function (item) {
-	        //console.log(item.quantity);
-	        console.log(item);
-	        item = 2;
-	    };
-
 	    $rootScope.addItem = function (id, quantity) {
 	        quantity = typeof quantity !== 'undefined' ? parseInt(quantity) : 1;
 	        let basket = $rootScope.basket;
 	        let hasItem = $rootScope.findInById(basket, id);
 	        let product = $rootScope.productById(id);
 
-	        //let calcQuantity = (hasItem ? hasItem.quantity : 0) + quantity;
-
 	        if (!quantity) {
 	            console.log(`wrong quantity amount ${quantity}`);
 	            return false;
 	        }
-
-	        //console.log(product.quantity);
 
 	        if (product.quantity < quantity) {
 	            console.log(`selected quantity ${quantity} exceeds the available ${product.quantity}`);
@@ -157,19 +139,6 @@
 	    $rootScope.getTotal = function () {
 	        var total = 0;
 
-	        //if (!$rootScope.products) {
-	        //    console.log('products not ready');
-	        //    return false;
-	        //}
-	        //
-	        //if (!$rootScope.basket) {
-	        //    console.log('basket not ready');
-	        //    return false;
-	        //}
-
-	        //console.log('do total');
-	        //console.log($rootScope.basket);
-
 	        angular.forEach($rootScope.basket, function (item, key) {
 	            let product = $rootScope.productById(item.id);
 	            total += product.price * item.quantity;
@@ -191,7 +160,6 @@
 	    };
 
 	    $rootScope.setOrderBy = function (expression) {
-	        console.log(expression);
 	        $rootScope.sortOrder = expression;
 	    };
 
@@ -219,12 +187,6 @@
 	            }
 	        });
 
-	        //console.log('take products');
-	        //console.log(basket[0]);
-
-	        //$rootScope.basket = basket;
-	        //$rootScope.basket.push(basket[0]);
-
 	        $rootScope.products = products;
 	        $rootScope.isProductsLoaded = true;
 	    });
@@ -247,6 +209,7 @@
 	});
 
 	app.controller('categories', function ($rootScope, $routeParams) {
+	    reinitCarousel();
 	    $rootScope.category_id = $routeParams.id;
 	});
 

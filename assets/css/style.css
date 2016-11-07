@@ -7,12 +7,16 @@ body {
 
 h4 {
   margin-top: 8px;
-  margin-bottom: 8px; }
-  h4 a {
-    text-decoration: underline;
-    color: #05a101;
-    font-weight: bold;
-    font-size: 15px; }
+  margin-bottom: 8px;
+  text-decoration: underline;
+  color: #05a101;
+  font-weight: bold;
+  font-size: 15px; }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
 
 .navbar-default .navbar-brand {
   color: #454748; }
@@ -42,16 +46,6 @@ h4 {
   display: inline-block;
   border-radius: 0; }
 
-.gallery {
-  margin: 3px 0;
-  text-align: center;
-  overflow: hidden;
-  height: 45px; }
-  .gallery img {
-    border: 1px solid #000;
-    display: inline-block;
-    margin: 0 3px; }
-
 .thumbnail .caption {
   padding-top: 0;
   font-size: 12px;
@@ -67,16 +61,60 @@ h4 {
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
   padding: 0; }
 
+.img-responsive {
+  margin: 0 auto;
+  height: 320px; }
+
+.gallery {
+  margin-top: 5px; }
+
+.owl-theme .owl-item img {
+  display: block;
+  height: 150px;
+  margin: 0 auto;
+  border: 1px solid #000; }
+
+.product-title {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis; }
+
+.products-list {
+  padding-top: 120px; }
+
+@media (max-width: 767px) {
+  #basket {
+    margin-top: 150px; }
+  .owl-theme .owl-controls .owl-buttons {
+    font-size: 0; }
+  .owl-theme .owl-controls .owl-buttons div {
+    display: inline-block;
+    width: 50%;
+    font-size: 16px;
+    text-align: center;
+    padding: 40px 0; } }
+
+@media only screen and (min-width: 992px) {
+  .panel-basket {
+    position: fixed;
+    z-index: 1111; } }
+
 @media (min-width: 768px) {
-  .img-responsive {
+  .products-list {
+    padding-top: 200px; }
+  .product-cover .img-responsive {
     margin: 0 auto;
     position: absolute;
     top: 0;
     bottom: 0;
-    margin: auto; }
+    margin: auto;
+    height: auto; }
   .navbar-default {
     padding-top: 50px;
-    background: transparent;
+    padding-bottom: 20px;
+    background: #fff;
     border: none; }
     .navbar-default .navbar-brand,
     .navbar-default .navbar-nav > li > a {
@@ -93,13 +131,42 @@ h4 {
       z-index: 1; }
     .thumb-overlap .product-cover {
       height: 210px;
-      position: relative; }
+      position: relative;
+      overflow: hidden; }
     .thumb-overlap .caption {
       height: 100px;
       min-height: 100px;
       overflow: hidden; }
     .thumb-overlap:hover .caption {
-      height: auto; } }
+      height: auto; }
+  .owl-theme .owl-controls .owl-buttons div {
+    position: absolute;
+    padding: 0; }
+  .owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 0;
+    top: 0; }
+  .owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0;
+    top: 0; }
+  .owl-theme .owl-buttons span {
+    line-height: 45px;
+    top: 0;
+    padding: 0 3px; }
+  .owl-theme .owl-item img {
+    display: block;
+    max-width: 45px;
+    height: 45px;
+    /*max-height: 45px !important;*/
+    margin: 0 auto; }
+  .gallery {
+    margin: 3px 0;
+    text-align: center;
+    overflow: hidden;
+    height: 45px;
+    padding: 0 16px; }
+    .gallery img {
+      border: 1px solid #000;
+      display: inline-block; } }
 
 .navbar-default .navbar-brand {
   padding-left: 0; }
@@ -134,10 +201,27 @@ h4 {
 .list-group {
   margin-bottom: 0; }
 
+.form-control {
+  height: auto;
+  display: inline-block;
+  padding: 4px;
+  font-size: 12px;
+  line-height: 24px; }
+
+.price {
+  width: 60px;
+  display: inline-block; }
+
+.price:before {
+  content: '$';
+  margin-right: 5px; }
+
 .quantity-field {
   width: auto;
   display: inline-block;
-  font-size: 0; }
+  font-size: 0;
+  line-height: 1;
+  height: 24px; }
   .quantity-field .btn-group {
     display: inline-block;
     vertical-align: bottom; }
@@ -147,23 +231,23 @@ h4 {
     font-size: 8px;
     padding: 2px 6px;
     float: none;
-    margin-left: 0; }
+    margin-left: 0;
+    line-height: 1; }
   .quantity-field .form-control {
-    height: auto;
+    height: 100%;
     display: inline-block;
     padding: 4px;
     font-size: 12px;
-    line-height: 22px;
+    line-height: 1;
+    text-align: center;
     border-right: 0;
-    text-align: right; }
+    width: 30px; }
 
 .btn-buy {
   font-size: 15px;
   position: relative;
   padding-right: 40px;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.35); }
-  .btn-buy .price:before {
-    content: '$ '; }
   .btn-buy .basket-icon {
     position: absolute;
     height: 100%;

@@ -21,6 +21,7 @@ var options = {
 
 $(document).ready(function () {
     initCarousel();
+    $('#page-loader').hide();
 });
 
 function initCarousel() {

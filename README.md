@@ -72,7 +72,7 @@ This task is about creating simple single page application with shopping basket 
 - [x] **The Sorting drop-down** can be either custom designed or just system default
 - [x] The item images should be **displayed as gallery** - if there are more than 3 images, the arrows should appear which scrolls images
 - [x] Available items count is taken from proper JSON (products[@EACH].quantity) and be decreased by already added to the basket count of exact item
-+ / - In products list, if there are no any more affordable items available for 'buying' - **Buy button should become disabled with gray background gradient colors, but still
+(+/-) In products list, if there are no any more affordable items available for 'buying' - **Buy button should become disabled with gray background gradient colors, but still
 should show how much this item would cost**. Also, quantity field which is located to the left from the button should have zero (0) as its value and be disabled too.
 - [x] User could specify quantity of products she wants to buy. Maximum quantity of the specific product could be taken from products dataset.
 - [x] User could increase quantity of products in the right panel, but could not exceed maximal quantity of the specific product. 

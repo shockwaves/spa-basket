@@ -67,19 +67,19 @@ This task is about creating simple single page application with shopping basket 
 - [x] If some of the top **category** filters selected - products from only corresponding category should be shown
 - [x] There should be next **sorting** modes  - None, Sorting by price in ascending order, Sorting by price in descending mode
 - [x] By clicking green button - product should appears in the right shopping basket
-- Layout of all buttons should be done using **CSS gradients**
+- [x] Layout of all buttons should be done using **CSS gradients**
 - Hover/Click on any of buttons (including buttons with arrows in quantity fields) **should change button background gradient colors**
-- **The Sorting drop-down** can be either custom designed or just system default
-- The item images should be **displayed as gallery** - if there are more than 3 images, the arrows should appear which scrolls images
-- Available items count is taken from proper JSON (products[@EACH].quantity) and be decreased by already added to the basket count of exact item
+- [x] **The Sorting drop-down** can be either custom designed or just system default
+- [x] The item images should be **displayed as gallery** - if there are more than 3 images, the arrows should appear which scrolls images
+- [x] Available items count is taken from proper JSON (products[@EACH].quantity) and be decreased by already added to the basket count of exact item
 - In products list, if there are no any more affordable items available for 'buying' - **Buy button should become disabled with gray background gradient colors, but still
 should show how much this item would cost**. Also, quantity field which is located to the left from the button should have zero (0) as its value and be disabled too.
-- User could specify quantity of products she wants to buy. Maximum quantity of the specific product could be taken from products dataset.
+- [x] User could specify quantity of products she wants to buy. Maximum quantity of the specific product could be taken from products dataset.
 - User could increase quantity of products in the right panel, but could not exceed maximal quantity of the specific product. 
-- User could decrease quantity of products in the right panel. If number of product is equal 0, product should disappear from the right panel.
+- [x] User could decrease quantity of products in the right panel. If number of product is equal 0, product should disappear from the right panel.
 - [x] Page should store it's state using cookie, localStorage, etc - so if user will reload page - products user selected before should appear in the right panel
 - [x] Final price should be calculated
-- By clicking on the product main thumbnail or some of additional thumbnails  - some gallery containing product pictures should appear
+- [x] By clicking on the product main thumbnail or some of additional thumbnails  - some gallery containing product pictures should appear
 - [x] The layout of the web page should be responsive. The position of different blocks on mobiles - up to you.
 
 Requirements
@@ -87,10 +87,10 @@ Requirements
 - [x] All sources should be committed to public source repository, such as: http://github.com, http://bitbucket.org, etc
 - [x] HTML5 doctype should be used
 - [x] CSS3 should be used
-- Feel free to use 3rd party libraries and frameworks (like jQuery, backbone, sass etc...)
+- [x] Feel free to use 3rd party libraries and frameworks (like jQuery, backbone, sass etc...)
 
 Additional plus
 -----------------
 - [x] Using any of module loader (e.g. require.js)
 - [x] Using Task Runner (e.g. Gulp) for concatenation, minifying etc
-- Item images gallery touch support (not only by clicking the buttons, but sliding the finger on images)
+- [x] Item images gallery touch support (not only by clicking the buttons, but sliding the finger on images)

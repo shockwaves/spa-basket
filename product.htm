@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="gallery owl-carousel owl-theme">
-                    <img class="item" ng-repeat="image in gallery.images"
+                    <img class="item" imageonload ng-repeat="image in gallery.images"
                     ng-src="images/{{product.gallery_id}}/{{image}}" ng-click="setCoverImage($index)">
                 </div>
             </div>

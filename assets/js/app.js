@@ -66,10 +66,10 @@
 	};
 
 	$(document).ready(function () {
-	    reinitCarousel();
+	    initCarousel();
 	});
 
-	function reinitCarousel() {
+	function initCarousel() {
 	    var owl = $(".owl-carousel");
 	    owl.owlCarousel(options);
 	}
@@ -209,7 +209,7 @@
 	});
 
 	app.controller('categories', function ($rootScope, $routeParams) {
-	    reinitCarousel();
+	    initCarousel();
 	    $rootScope.category_id = $routeParams.id;
 	});
 
@@ -253,6 +253,20 @@
 	    };
 	});
 
+	app.directive('imageonload', function() {
+	    return {
+	        restrict: 'A',
+	        link: function(scope, element, attrs) {
+	            element.bind('load', function() {
+	                console.log('image is loaded');
+	                initCarousel();
+	            });
+	            element.bind('error', function(){
+	                console.log('image could not be loaded');
+	            });
+	        }
+	    };
+	});
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ },

@@ -20,10 +20,10 @@ var options = {
 };
 
 $(document).ready(function () {
-    reinitCarousel();
+    initCarousel();
 });
 
-function reinitCarousel() {
+function initCarousel() {
     var owl = $(".owl-carousel");
     owl.owlCarousel(options);
 }
@@ -163,7 +163,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('categories', function ($rootScope, $routeParams) {
-    reinitCarousel();
+    initCarousel();
     $rootScope.category_id = $routeParams.id;
 });
 
@@ -204,5 +204,20 @@ app.controller('galleries', function ($scope) {
     $scope.imgIndex = 0;
     $scope.setCoverImage = function (index) {
         $scope.imgIndex = index;
+    };
+});
+
+app.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                console.log('image is loaded');
+                initCarousel();
+            });
+            element.bind('error', function(){
+                console.log('image could not be loaded');
+            });
+        }
     };
 });

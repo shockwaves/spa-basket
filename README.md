@@ -62,11 +62,11 @@ Task description
 -------------------
 This task is about creating simple single page application with shopping basket functionality which consists of few products from different categories.
 
-- All products, categories and galleries should be loaded from the proper **remote** json file
-- By default products from all **categories** should be shown, if there is no category filter selected
-- If some of the top **category** filters selected - products from only corresponding category should be shown
-- There should be next **sorting** modes  - None, Sorting by price in ascending order, Sorting by price in descending mode
-- By clicking green button - product should appears in the right shopping basket
+- [x] All products, categories and galleries should be loaded from the proper **remote** json file
+- [x] By default products from all **categories** should be shown, if there is no category filter selected
+- [x] If some of the top **category** filters selected - products from only corresponding category should be shown
+- [x] There should be next **sorting** modes  - None, Sorting by price in ascending order, Sorting by price in descending mode
+- [x] By clicking green button - product should appears in the right shopping basket
 - Layout of all buttons should be done using **CSS gradients**
 - Hover/Click on any of buttons (including buttons with arrows in quantity fields) **should change button background gradient colors**
 - **The Sorting drop-down** can be either custom designed or just system default
@@ -77,20 +77,20 @@ should show how much this item would cost**. Also, quantity field which is locat
 - User could specify quantity of products she wants to buy. Maximum quantity of the specific product could be taken from products dataset.
 - User could increase quantity of products in the right panel, but could not exceed maximal quantity of the specific product. 
 - User could decrease quantity of products in the right panel. If number of product is equal 0, product should disappear from the right panel.
-- Page should store it's state using cookie, localStorage, etc - so if user will reload page - products user selected before should appear in the right panel
-- Final price should be calculated
+- [x] Page should store it's state using cookie, localStorage, etc - so if user will reload page - products user selected before should appear in the right panel
+- [x] Final price should be calculated
 - By clicking on the product main thumbnail or some of additional thumbnails  - some gallery containing product pictures should appear
-- The layout of the web page should be responsive. The position of different blocks on mobiles - up to you.
+- [x] The layout of the web page should be responsive. The position of different blocks on mobiles - up to you.
 
 Requirements
 -----------------
-- All sources should be committed to public source repository, such as: http://github.com, http://bitbucket.org, etc
-- HTML5 doctype should be used
-- CSS3 should be used
+- [x] All sources should be committed to public source repository, such as: http://github.com, http://bitbucket.org, etc
+- [x] HTML5 doctype should be used
+- [x] CSS3 should be used
 - Feel free to use 3rd party libraries and frameworks (like jQuery, backbone, sass etc...)
 
 Additional plus
 -----------------
-- Using any of module loader (e.g. require.js)
-- Using Task Runner (e.g. Gulp) for concatenation, minifying etc
+- [x] Using any of module loader (e.g. require.js)
+- [x] Using Task Runner (e.g. Gulp) for concatenation, minifying etc
 - Item images gallery touch support (not only by clicking the buttons, but sliding the finger on images)

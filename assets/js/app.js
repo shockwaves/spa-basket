@@ -55,7 +55,7 @@
 	var options = {
 	    items: 3,
 	    margin: 20,
-	    autoHeight : true,
+	    autoHeight: true,
 	    stagePadding: 50,
 	    navigation: true,
 	    navigationText: [
@@ -78,11 +78,57 @@
 	var app = angular.module('spa-basket', ["ngRoute"]);
 
 	app.run(function ($rootScope, $filter, $http) {
-	    $rootScope.isProductsLoaded = false;
+	    $http.get("data/galleries.json").then(function (response) {
+	        $rootScope.galleries = response.data.galleries;
+	    });
+	});
+
+	app.config(function ($routeProvider) {
+
+	    $routeProvider
+	        .when("/", {
+	            templateUrl: "product.htm",
+	            controller: "categories"
+	        })
+	        .when("/categories/:id", {
+	            templateUrl: "product.htm",
+	            controller: "categories"
+	        })
+	        .when("/basket", {
+	            controller: "basket"
+	        })
+	        .otherwise({redirectTo: '/'});
+	});
+
+	app.controller('categories', function ($rootScope, $routeParams, $http) {
+	    $http.get("data/categories.json").then(function (response) {
+	        $rootScope.categories = response.data.categories;
+	    });
+
+	    $rootScope.setOrderBy = function (expression) {
+	        $rootScope.sortOrder = expression;
+	    };
+
+	    $rootScope.isCategoryActive = function (category_id) {
+	        return category_id === $rootScope.category_id;
+	    };
+
+
+	    initCarousel();
+	    $rootScope.category_id = $routeParams.id;
+	});
+
+	app.controller('basket', function ($rootScope, $scope, $location, $anchorScroll) {
 	    $rootScope.basket = angular.fromJson(localStorage.getItem("basket")) || [];
 
+	    angular.forEach($rootScope.products, function (product, key) {
+	        let hasItem = $rootScope.findInById($rootScope.basket, product.id);
+	        if (hasItem) {
+	            product.quantity -= hasItem.quantity;
+	        }
+	    });
+
 	    $rootScope.$watch('basket', function (newValue, oldValue, scope) {
-	        console.log('update basket');
 	        localStorage.setItem("basket", angular.toJson($rootScope.basket));
 	    }, true);
 
@@ -113,6 +159,7 @@
 	        }
 
 	        product.quantity -= quantity;
+	        product.buyQuantity = product.buyQuantity > product.quantity ? product.quantity : product.buyQuantity;
 	        localStorage.setItem("basket", angular.toJson(basket));
 	    };
 
@@ -134,6 +181,7 @@
 	        }
 
 	        product.quantity++;
+	        product.buyQuantity = product.buyQuantity < 1 ? 1 : 1;
 	        localStorage.setItem("basket", angular.toJson(basket));
 	    };
 
@@ -148,6 +196,18 @@
 	        return total;
 	    };
 
+	    $scope.scrollTo = function (id) {
+	        $location.hash(id);
+	        $anchorScroll();
+	    };
+	});
+
+	app.controller('products', function ($rootScope, $scope, $http, $filter) {
+	    $http.get("data/products.json").then(function (response) {
+	        let products = response.data.products;
+	        $rootScope.products = products;
+	    });
+
 	    $rootScope.productById = function (id) {
 	        if (!$rootScope.products) {
 	            return false;
@@ -160,90 +220,30 @@
 	        return $filter('filter')(storage, {id: id})[0];
 	    };
 
-	    $rootScope.setOrderBy = function (expression) {
-	        $rootScope.sortOrder = expression;
+	    $scope.getDefaultBuyQuantity = function (product) {
+	        return product.quantity ? 1 : 0;
 	    };
 
-	    $rootScope.isCategoryActive = function (category_id) {
-	        return category_id === $rootScope.category_id;
-	    };
-
-	    $http.get("data/categories.json").then(function (response) {
-	        $rootScope.categories = response.data.categories;
-	    });
-
-	    $http.get("data/galleries.json").then(function (response) {
-	        $rootScope.galleries = response.data.galleries;
-	    });
-
-	    $http.get("data/products.json").then(function (response) {
-	        let products = response.data.products;
-
-	        //let basket = angular.fromJson(localStorage.getItem("basket")) || [];
-	        angular.forEach(products, function (product, key) {
-	            let hasItem = $rootScope.findInById($rootScope.basket, product.id);
-	            //let hasItem = $rootScope.findInById(basket, product.id);
-	            if (hasItem) {
-	                product.quantity -= hasItem.quantity;
-	            }
-	        });
-
-	        $rootScope.products = products;
-	        $rootScope.isProductsLoaded = true;
-	    });
-	});
-
-	app.config(function ($routeProvider) {
-	    $routeProvider
-	        .when("/", {
-	            templateUrl: "product.htm",
-	            controller: "categories"
-	        })
-	        .when("/categories/:id", {
-	            templateUrl: "product.htm",
-	            controller: "categories"
-	        })
-	        .when("/basket", {
-	            controller: "basket"
-	        })
-	        .otherwise({redirectTo: '/'});
-	});
-
-	app.controller('categories', function ($rootScope, $routeParams) {
-	    initCarousel();
-	    $rootScope.category_id = $routeParams.id;
-	});
-
-	app.controller('basket', function ($location, $anchorScroll) {
-	    $scope.scrollTo = function(id) {
-	        $location.hash(id);
-	        $anchorScroll();
-	    };
-	});
-
-	app.controller('products', function ($scope) {
-	    $scope.quantity = 1;
-
-	    $scope.$watch('product', function (newValue, oldValue, scope) {
-	        $scope.quantity = !newValue.quantity ? 0 : 1;
-	    }, true);
-
-	    $scope.$watch('quantity', function (newValue, oldValue, scope) {
-	        if($scope.quantity > $scope.product.quantity) {
-	            $scope.quantity = $scope.product.quantity;
+	    $scope.changeBuyQuantity = function (product) {
+	        if (product.buyQuantity > product.quantity) {
+	            product.buyQuantity = product.quantity;
 	        }
 
-	        if($scope.quantity <= 0 && $scope.product.quantity) {
-	            $scope.quantity = 1;
+	        if (product.buyQuantity < 1 && product.quantity) {
+	            product.buyQuantity = 1;
 	        }
-	    }, true);
-
-	    $scope.increaseQuantity = function (product) {
-	        product.quantity >= $scope.quantity + 1 && $scope.quantity++;
 	    };
 
-	    $scope.decreaseQuantity = function (product) {
-	        ($scope.quantity - 1) > 0 && $scope.quantity--;
+	    $scope.increaseBuyQuantity = function (product) {
+	        if (product.quantity > product.buyQuantity) {
+	            product.buyQuantity++;
+	        }
+	    };
+
+	    $scope.decreaseBuyQuantity = function (product) {
+	        if (product.buyQuantity > 1) {
+	            product.buyQuantity--;
+	        }
 	    };
 	});
 
@@ -254,15 +254,15 @@
 	    };
 	});
 
-	app.directive('imageonload', function() {
+	app.directive('imageonload', function () {
 	    return {
 	        restrict: 'A',
-	        link: function(scope, element, attrs) {
-	            element.bind('load', function() {
-	                console.log('image is loaded');
+	        link: function (scope, element, attrs) {
+	            element.bind('load', function () {
+	                //console.log('image is loaded');
 	                initCarousel();
 	            });
-	            element.bind('error', function(){
+	            element.bind('error', function () {
 	                console.log('image could not be loaded');
 	            });
 	        }

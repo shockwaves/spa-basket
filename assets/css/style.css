@@ -81,12 +81,7 @@ input::-webkit-inner-spin-button {
   display: inline-block;
   text-overflow: ellipsis; }
 
-.products-list {
-  padding-top: 120px; }
-
 @media (max-width: 767px) {
-  #basket {
-    margin-top: 150px; }
   .owl-theme .owl-controls .owl-buttons {
     font-size: 0; }
   .owl-theme .owl-controls .owl-buttons div {
@@ -99,11 +94,10 @@ input::-webkit-inner-spin-button {
 @media only screen and (min-width: 992px) {
   .panel-basket {
     position: fixed;
-    z-index: 1111; } }
+    z-index: 1111;
+    top: 0; } }
 
 @media (min-width: 768px) {
-  .products-list {
-    padding-top: 200px; }
   .product-cover .img-responsive {
     margin: 0 auto;
     position: absolute;
@@ -224,7 +218,7 @@ input::-webkit-inner-spin-button {
   height: 24px; }
   .quantity-field .btn-group {
     display: inline-block;
-    vertical-align: bottom; }
+    vertical-align: top; }
   .quantity-field .btn-group > .btn {
     display: block;
     border-radius: 0;

@@ -1,16 +1,20 @@
-<div class="col-sm-4 col-lg-4 col-md-4"
+<div class="col-sm-4 col-lg-4 col-md-4"  ng-if="products"
      ng-repeat="product in products | filter:{category_id: category_id} | orderBy: sortOrder">
     <div class="thumb-overlap">
         <div class="thumbnail">
-            <div ng-controller="galleries" ng-repeat="gallery in galleries | filter:{id: product.gallery_id}">
+            <div ng-controller="galleries"
+                 ng-repeat="gallery in galleries | filter:{id: product.gallery_id}">
                 <div class="product-cover">
-                    <img class="img-responsive" ng-src="images/{{product.gallery_id}}/{{ gallery.images[imgIndex] }}"
-                         alt="{{ product.title }}" title="{{ product.title }}">
+                    <img class="img-responsive"
+                         ng-src="images/{{product.gallery_id}}/{{ gallery.images[imgIndex] }}"
+                         alt="{{ product.title }}"
+                         title="{{ product.title }}">
                 </div>
 
                 <div class="gallery owl-carousel owl-theme">
                     <img class="item" imageonload ng-repeat="image in gallery.images"
-                    ng-src="images/{{product.gallery_id}}/{{image}}" ng-click="setCoverImage($index)">
+                         ng-src="images/{{product.gallery_id}}/{{image}}"
+                         ng-click="setCoverImage($index)">
                 </div>
             </div>
 
@@ -19,27 +23,30 @@
 
                 <p>{{ product.description }}</p>
             </div>
-            <div ng-controller="products" class="ratings clearfix">
+            <div class="ratings clearfix">
                 <div class="quantity-field">
                     <input class="form-control product-quantity" type="number"
-                           ng-init="quantity = product.quantity ? 1 : 0" ng-disabled="!product.quantity"
-                           ng-value="{{ quantity }}" ng-model="quantity">
+                           ng-disabled="!product.quantity"
+                           ng-change="changeBuyQuantity(product)"
+                           ng-init="product.buyQuantity = getDefaultBuyQuantity(product)"
+                           ng-model="product.buyQuantity">
 
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-success dropup"
                                 ng-disabled="!product.quantity"
-                                ng-click="increaseQuantity(product)">
+                                ng-click="increaseBuyQuantity(product)">
                             <span class="caret"></span>
                         </button>
                         <button type="button" class="btn btn-success"
                                 ng-disabled="!product.quantity"
-                                ng-click="decreaseQuantity(product)">
+                                ng-click="decreaseBuyQuantity(product)">
                             <span class="caret"></span>
                         </button>
                     </div>
                 </div>
                 <button type="button" class="btn btn-success btn-buy pull-right"
-                        ng-disabled="!product.quantity" ng-click="addItem(product.id, quantity)">
+                        ng-disabled="!product.quantity"
+                        ng-click="addItem(product.id, product.buyQuantity)">
                     <span class="price">{{ product.price }}</span>
                     <span class="glyphicon glyphicon-shopping-cart basket-icon"></span>
                 </button>
